@@ -111,13 +111,13 @@ class Target:
 
 
 def game_update():
-    global root, canvas, shells, gun, target, bullets_text_vidjet, bullets, score_widget, points
+    global root, canvas, shells, gun, target, bullets_text_widget, bullets, score_widget, points
 
     shells = []
 
     gun = Gun()
     target = Target()
-    bullets_text_vidjet = canvas.create_text(400, 300, text='', font='28')
+    bullets_text_widget = canvas.create_text(400, 300, text='', font='28')
     bullets = 0
 
     canvas.bind('<Button-1>', gun.charging)
@@ -134,14 +134,14 @@ def game_update():
                 canvas.delete(shell.id)
                 canvas.bind('<Button-1>', '')
                 canvas.bind('<ButtonRelease-1>', '')
-                canvas.itemconfig(bullets_text_vidjet, text='Вы уничтожили цель за ' + str(bullets) + ' выстрелов')
+                canvas.itemconfig(bullets_text_widget, text='Вы уничтожили цель за ' + str(bullets) + ' выстрелов')
                 canvas.itemconfig(score_widget, text=points)
         canvas.update()
         time.sleep(0.03)
         gun.aiming()
         gun.power_up()
     time.sleep(2)
-    canvas.itemconfig(bullets_text_vidjet, text='')
+    canvas.itemconfig(bullets_text_widget, text='')
     canvas.delete(gun.id)
     root.after(1, game_update)
 
