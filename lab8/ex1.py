@@ -68,15 +68,31 @@ class Shell:
         self.vy = vy
         self.id = canvas.create_oval(self.x - self.r, self.y - self.r, self.x + self.r, self.y + self.r,
                                      fill=choice(colors))
+        self.live = 30
 
     def set_coord(self):
         canvas.coords(self.id, self.x - self.r, self.y - self.r, self.x + self.r, self.y + self.r)
 
     def move(self):
-        # добавить силу гравитации, и рикошет от стен
-        self.x += self.vx
-        self.y -= self.vy
-        self.set_coord()
+        if self.y <= 500:
+            self.vy -= 1.2
+            self.y -= self.vy
+            self.x += self.vx
+            self.vx *= 0.99
+            self.set_coord()
+        else:
+            if self.vx ** 2 + self.vy ** 2 > 10:
+                self.vy = -self.vy / 2
+                self.vx = self.vx / 2
+                self.y = 499
+            if self.live < 0:
+                shells.pop(shells.index(self))
+                canvas.delete(self.id)
+            else:
+                self.live -= 1
+        if self.x > 780:
+            self.vx = -self.vx / 2
+            self.x = 779
 
 
 class Target:
@@ -133,4 +149,3 @@ def game_update():
 main()
 game_update()
 root.mainloop()
-
