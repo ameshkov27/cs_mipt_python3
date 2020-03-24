@@ -100,7 +100,7 @@ class Target:
         self.points = 0
         self.live = 1
         x = self.x = randint(600, 780)
-        y = self.y = randint(300, 550)
+        y = self.y = randint(100, 490)
         r = self.r = randint(10, 50)
         color = self.color = 'red'
         self.id = canvas.create_oval(x - r, y - r, x + r, y + r)
