@@ -135,7 +135,6 @@ def game_update():
                     canvas.delete(shell.id)
                     targets.pop(i)
                     live = len(targets)
-                    print(live)
                     canvas.itemconfig(score_widget, text=points)
             if len(targets) == 0:
                 canvas.bind('<Button-1>', '')
